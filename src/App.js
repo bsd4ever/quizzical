@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import InitPage from "./InitPage"
+import React, { useEffect, useState } from "react"
+import Quiz from "./Quiz"
+import "./styles.css"
 
 function App() {
+  const [isInitPage, setIsInitPage] = useState(true)
+  const [questions, setQuestions] = useState([])
+  const [isReveal, setIsReveal] = useState(false)
+
+  const getData = async () => {
+    const response = await fetch("https://opentdb.com/api.php?amount=5")
+    const data = await response.json()
+    setQuestions(data.results)
+    console.log(data.results)
+  }
+
+  useEffect(() => {
+    getData()
+  }, [isReveal])
+
+  const startGame = () => {
+    setIsInitPage((prev) => !prev)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      {isInitPage ? (
+        <InitPage changePage={startGame} />
+      ) : (
+        <Quiz
+          questions={questions}
+          isReveal={isReveal}
+          setIsReveal={setIsReveal}
+        />
+      )}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

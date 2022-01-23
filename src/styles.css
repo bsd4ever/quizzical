@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Karla:wght@500;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Karla, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #293264;
+  background-color: #f5f7fb;
+}
+
+.init-page {
+  box-sizing: border-box;
+  height: 100vh;
+}
+
+button {
+  display: block;
+  margin: 3rem auto;
+  font-family: Karla, sans-serif;
+  font-size: 1rem;
+  background: #4d5b9e;
+  color: #f5f7fb;
+  border-radius: 1rem;
+  padding: 0.75em 4em;
+  border: none;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 3rem;
+}
+
+.answers {
+  display: flex;
+  gap: 1rem;
+}
+
+.answer {
+  background: none;
+  border: 1px solid #4d5b9e;
+  color: #293264;
+}
+
+.question-container {
+  margin-top: 5em;
+  margin-bottom: 3.5em;
+}
+
+.correct {
+  border: none;
+  background: #94d7a2;
+}
+
+.incorrect {
+  opacity: 0.5;
+}
+
+.wrong {
+  background: #f8bcbc;
+  border: none;
+  opacity: 0.5;
+}
+
+.is-checked {
+  background: #d6dbf5;
+  border: none;
+}
+
+.quiz {
+  padding: 3em;
+  padding-top: 0;
+}
+
+.message-container {
+  margin-top: 3em;
+  margin-bottom: 3em;
+  width: 80%;
+  margin: 0 auto;
+  align-items: center;
+  display: flex;
+  font-size: 1.5rem;
+  font-weight: 500;
+  justify-content: space-evenly;
+}
+
+.play-again-btn {
+  margin: 0;
+}
