@@ -3,11 +3,16 @@ import Question from "./Question"
 import { nanoid } from "nanoid"
 
 const Quiz = (props) => {
-  const [correctAnswers, setCorrectAnswers] = useState(0)
-
-  const correctAnswer = () => {
-    setCorrectAnswers((prev) => prev + 1)
-    console.log("something")
+  const countCorrectAnswers = () => {
+    let answersCount = 0
+    questions.forEach((question) => {
+      question.answers.forEach((answer) => {
+        if (answer.isChecked && answer.isCorrect) {
+          answersCount += 1
+        }
+      })
+    })
+    return answersCount
   }
 
   const properObjectStructure = (object) => {
@@ -104,7 +109,6 @@ const Quiz = (props) => {
           ...question,
           answers: question.answers.map((answer) => {
             if (answer.id === id) {
-              correctAnswer()
               return { ...answer, isChecked: true }
             } else {
               return answer
@@ -128,7 +132,7 @@ const Quiz = (props) => {
         )
       })}
       <div className="message-container">
-        {props.isReveal && <p>You scored {correctAnswers} answers</p>}
+        {props.isReveal && <p>You scored {countCorrectAnswers()} answers</p>}
         <button onClick={revealAnswers} className="play-again-btn">
           {props.isReveal ? "Play again" : "Check answers"}
         </button>
