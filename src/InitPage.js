@@ -6,7 +6,9 @@ const InitPage = (props) => {
     <div className="init-page">
       <div className="container start">
         <h1 className="title">Quizzical</h1>
-        <button onClick={props.changePage}>Start quiz</button>
+        <button onClick={props.changePage} className="start-btn">
+          Start quiz
+        </button>
       </div>
     </div>
   )
