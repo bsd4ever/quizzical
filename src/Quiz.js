@@ -11,7 +11,10 @@ const Quiz = (props) => {
   }
 
   const properObjectStructure = (object) => {
+    const questionId = nanoid()
+
     const correctAnswerObject = {
+      questionId,
       id: nanoid(),
       answer: object.correct_answer,
       isCorrect: true,
@@ -19,6 +22,7 @@ const Quiz = (props) => {
     }
     const inCorrectAnswersObjectsArray = object.incorrect_answers.map(
       (answer) => ({
+        questionId,
         id: nanoid(),
         answer: answer,
         isCorrect: false,
@@ -30,7 +34,7 @@ const Quiz = (props) => {
       correctAnswerObject,
       ...inCorrectAnswersObjectsArray,
     ])
-    return { ...object, answers: allAnswersArray }
+    return { ...object, answers: allAnswersArray, questionId }
   }
   const properQuestionsObjectsArray = props.questions.map((question) =>
     properObjectStructure(question)
@@ -68,12 +72,39 @@ const Quiz = (props) => {
   }
 
   const checkAnswer = (id) => {
+    // Resetting all answer checkups in question
+    let questionId
+
+    questions.forEach((question) => {
+      if (question.answers.find((answer) => answer.id === id)) {
+        questionId = question.questionId
+      }
+    })
+
+    setQuestions((prev) =>
+      prev.map((question) => {
+        if (question.questionId === questionId) {
+          return {
+            ...question,
+            answers: question.answers.map((answer) => ({
+              ...answer,
+              isChecked: false,
+            })),
+          }
+        } else {
+          return question
+        }
+      })
+    )
+
+    //Checking up the answer
     setQuestions((prev) =>
       prev.map((question) => {
         return {
           ...question,
           answers: question.answers.map((answer) => {
             if (answer.id === id) {
+              correctAnswer()
               return { ...answer, isChecked: true }
             } else {
               return answer
@@ -82,13 +113,6 @@ const Quiz = (props) => {
         }
       })
     )
-    questions.map((question) => {
-      question.answers.map((answer) => {
-        if (answer.id === id && answer.isCorrect) {
-          correctAnswer()
-        }
-      })
-    })
   }
 
   return (

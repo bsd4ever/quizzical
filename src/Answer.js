@@ -28,7 +28,7 @@ const Answer = (props) => {
     } else if (props.answer.isChecked && !props.isRevealed) {
       setStyleBtn("is-checked")
     }
-  }, [])
+  }, [props.answer.isChecked, props.isRevealed, props.answer.isCorrect])
 
   return (
     <button className={`answer ${styleBtn}`} onClick={props.checkAnswer}>
