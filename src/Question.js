@@ -23,7 +23,6 @@ const Question = (props) => {
           />
         ))}
       </div>
-      <hr />
     </div>
   )
 }

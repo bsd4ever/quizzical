@@ -13,6 +13,7 @@ body {
   align-items: center;
   color: #293264;
   background-color: #f5f7fb;
+  background: url("https://cdn.pixabay.com/photo/2017/07/12/09/54/line-2496359_960_720.png");
 }
 
 .init-page {
@@ -53,6 +54,9 @@ button {
 }
 
 .question-container {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1em;
+  border-radius: 1rem;
   margin-top: 5em;
   margin-bottom: 3.5em;
 }
@@ -83,9 +87,12 @@ button {
 }
 
 .message-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 1rem;
+  padding: 1em;
   margin-top: 3em;
   margin-bottom: 3em;
-  width: 80%;
+  width: 50%;
   margin: 0 auto;
   align-items: center;
   display: flex;
