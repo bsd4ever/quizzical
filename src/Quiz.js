@@ -69,10 +69,10 @@ const Quiz = (props) => {
   function revealAnswers() {
     if (!props.isReveal) {
       props.setIsReveal(true)
+      props.setIsPlaying(false)
     } else {
       props.setIsReveal(false)
-      console.log(questions)
-      console.log(questions)
+      props.setIsPlaying(true)
     }
   }
 

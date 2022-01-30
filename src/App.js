@@ -7,20 +7,22 @@ function App() {
   const [isInitPage, setIsInitPage] = useState(true)
   const [questions, setQuestions] = useState([])
   const [isReveal, setIsReveal] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
 
   const getData = async () => {
     const response = await fetch("https://opentdb.com/api.php?amount=5")
     const data = await response.json()
     setQuestions(data.results)
-    console.log(data.results)
   }
 
   useEffect(() => {
     getData()
-  }, [isReveal])
+    console.log(isPlaying)
+  }, [isPlaying])
 
   const startGame = () => {
     setIsInitPage((prev) => !prev)
+    setIsPlaying(true)
   }
 
   return (
@@ -32,6 +34,7 @@ function App() {
           questions={questions}
           isReveal={isReveal}
           setIsReveal={setIsReveal}
+          setIsPlaying={setIsPlaying}
         />
       )}
     </div>

@@ -1,14 +1,9 @@
 import React, { useEffect } from "react"
 import { useState } from "react/cjs/react.development"
+import decodeHtml from "./decodeHtml"
 
 const Answer = (props) => {
   const [styleBtn, setStyleBtn] = useState("")
-
-  function decodeHtml(html) {
-    var txt = document.createElement("textarea")
-    txt.innerHTML = html
-    return txt.value
-  }
 
   useEffect(() => {
     if (props.isRevealed && props.answer.isCorrect) {
