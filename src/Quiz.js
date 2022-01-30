@@ -78,45 +78,48 @@ const Quiz = (props) => {
 
   const checkAnswer = (id) => {
     // Resetting all answer checkups in question
-    let questionId
+    if (props.isPlaying) {
+      let questionId
 
-    questions.forEach((question) => {
-      if (question.answers.find((answer) => answer.id === id)) {
-        questionId = question.questionId
-      }
-    })
+      questions.forEach((question) => {
+        if (question.answers.find((answer) => answer.id === id)) {
+          questionId = question.questionId
+        }
+      })
 
-    setQuestions((prev) =>
-      prev.map((question) => {
-        if (question.questionId === questionId) {
+      setQuestions((prev) =>
+        prev.map((question) => {
+          if (question.questionId === questionId) {
+            return {
+              ...question,
+              answers: question.answers.map((answer) => ({
+                ...answer,
+                isChecked: false,
+              })),
+            }
+          } else {
+            return question
+          }
+        })
+      )
+
+      //Checking up the answer
+      setQuestions((prev) =>
+        prev.map((question) => {
           return {
             ...question,
-            answers: question.answers.map((answer) => ({
-              ...answer,
-              isChecked: false,
-            })),
+            answers: question.answers.map((answer) => {
+              if (answer.id === id) {
+                console.log(!answer.isChecked)
+                return { ...answer, isChecked: true }
+              } else {
+                return answer
+              }
+            }),
           }
-        } else {
-          return question
-        }
-      })
-    )
-
-    //Checking up the answer
-    setQuestions((prev) =>
-      prev.map((question) => {
-        return {
-          ...question,
-          answers: question.answers.map((answer) => {
-            if (answer.id === id) {
-              return { ...answer, isChecked: true }
-            } else {
-              return answer
-            }
-          }),
-        }
-      })
-    )
+        })
+      )
+    }
   }
 
   return (

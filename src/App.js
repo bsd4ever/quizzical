@@ -8,9 +8,10 @@ function App() {
   const [questions, setQuestions] = useState([])
   const [isReveal, setIsReveal] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
+  const url = "https://opentdb.com/api.php?amount=5&category=25&difficulty=easy"
 
   const getData = async () => {
-    const response = await fetch("https://opentdb.com/api.php?amount=5")
+    const response = await fetch(url)
     const data = await response.json()
     setQuestions(data.results)
   }
@@ -35,6 +36,7 @@ function App() {
           isReveal={isReveal}
           setIsReveal={setIsReveal}
           setIsPlaying={setIsPlaying}
+          isPlaying={isPlaying}
         />
       )}
     </div>
