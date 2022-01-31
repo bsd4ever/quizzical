@@ -8,7 +8,7 @@ function App() {
   const [questions, setQuestions] = useState([])
   const [isReveal, setIsReveal] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
-  const url = "https://opentdb.com/api.php?amount=5&category=25&difficulty=easy"
+  const url = "https://opentdb.com/api.php?amount=5"
 
   const getData = async () => {
     const response = await fetch(url)
